@@ -2,11 +2,24 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 sns.set()
 
+# Configure the page
+st.set_page_config(
+    page_title="World Cities Explorer",
+    page_icon="🌍",
+    layout="wide"
+)
 
-st.title('World Cites')
-df = pd.read_csv('worldcities.csv')
+st.title('🌍 World Cities Explorer')
+
+# Get the absolute path to the CSV file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+csv_path = os.path.join(parent_dir, 'worldcities.csv')
+
+df = pd.read_csv(csv_path)
 
 # note that you have to use 0.0 and 40.0 given that the data type of population is float
 population_filter = st.slider('Minimal Population (Millions):', 0.0, 40.0, 3.6)  # min, max, default
